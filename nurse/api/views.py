@@ -32,19 +32,14 @@ class TenderAnalysisView(ModelViewSet):
             return Response({"error": "Tender not found"}, status=status.HTTP_404_NOT_FOUND)
 
         def analyze_Tender(Tender_text):
-            openai.api_key = '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'
+            print(Tender_text)
+            openai.api_key = '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'
 
             prompt = f"{Tender_text}"
 
             response = openai.Completion.create(
                 engine="davinci",  # You can experiment with different engines
                 prompt=prompt,
-                max_tokens=700,  # Limit the response to a single token (good or bad)
-                temperature=0.0,  # Set to 0 for deterministic output
-                top_p=1.0,
-                frequency_penalty=0.0,
-                presence_penalty=0.0,
-                stop=["\n"]
             )
 
             sentiment = response.choices[0].text.strip()
